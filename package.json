@@ -1,0 +1,18 @@
+{
+  "name": "normal",
+  "version": "1.0.0",
+  "description": "普通下雪",
+  "scripts": {
+    "start": "ath2 s",
+    "build": "ath2 build",
+    "test": "",
+    "eslint": "eslint */component */page"
+  },
+  "dependencies": {
+    "dat.gui": "^0.7.1",
+    "preloader.js": "^1.0.0"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-o2team"
+  }
+}
