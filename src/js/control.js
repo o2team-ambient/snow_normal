@@ -36,13 +36,13 @@ class Control {
     const gui = new dat.GUI()
     gui.add(otherConfig, 'message').name('配置面板')
     gui.add(otherConfig, 'play').name('播放 / 暂停')
-    gui.add(config, 'particleNumber', 3, 100).name('粒子数量').onChange(val => {
+    gui.add(config, 'particleNumber', 3, 100, 1).name('粒子数量').onChange(val => {
       window[O2_AMBIENT_INIT]()
     })
     gui.addColor(otherConfig, 'backgroundColor').name('背景颜色').onFinishChange(val => {
       Control.setBackgroundColor(val)
     })
-    gui.add(config, 'maxRadius', 4, 10, 1).onFinishChange(val => {
+    gui.add(config, 'maxRadius', 4, 10, 1).name('粒子最大半径').onFinishChange(val => {
       window[O2_AMBIENT_INIT]()
     })
     if (!this.isShow) gui.close()
