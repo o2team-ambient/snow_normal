@@ -1,4 +1,6 @@
 import Snow from './components/snow'
+import './components/modernizr'
+import './components/raf'
 import {
   O2_AMBIENT_CONFIG,
   O2_AMBIENT_INIT,
@@ -25,4 +27,7 @@ function initAmbient () {
 }
 
 window[O2_AMBIENT_INIT] = initAmbient
-initAmbient()
+
+if (window.Modernizr.requestanimationframe) {
+  initAmbient()
+}
