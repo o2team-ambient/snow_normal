@@ -23,7 +23,6 @@ class OtherConfig {
 
 class Control {
   constructor () {
-    this.isShow = isShowController
     this.config = window[O2_AMBIENT_CONFIG]
     this.otherConfig = new OtherConfig()
     this.initBaseGUI()
@@ -45,7 +44,6 @@ class Control {
     gui.add(config, 'maxRadius', 4, 10, 1).name('粒子最大半径').onFinishChange(val => {
       window[O2_AMBIENT_INIT]()
     })
-    if (!this.isShow) gui.close()
     this.gui = gui
     this.setGUIzIndex(2)
   }
@@ -59,5 +57,7 @@ class Control {
   }
 }
 
-/* eslint-disable no-new */
-new Control()
+if (isShowController) {
+  /* eslint-disable no-new */
+  new Control()
+}
