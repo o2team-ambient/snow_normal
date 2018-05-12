@@ -17,8 +17,17 @@ function getRandomInt (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
+function getDevicePixelRatio () {
+  let result = 1
+  if (window.devicePixelRatio) {
+    result = window.devicePixelRatio >= 2 ? 2 : 1
+  }
+  return result
+}
+
 export {
   getParameterByName,
   getRandom,
-  getRandomInt
+  getRandomInt,
+  getDevicePixelRatio
 }

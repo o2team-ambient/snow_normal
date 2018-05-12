@@ -1,5 +1,5 @@
 import debounce from 'lodash/debounce'
-import { getRandom, getRandomInt } from './utils'
+import { getRandom, getRandomInt, getDevicePixelRatio } from './utils'
 import { O2_AMBIENT_CLASSNAME } from './const'
 
 class Snow {
@@ -9,12 +9,13 @@ class Snow {
     parent = document.body,
     fps = 30,
     textures = [],
-    particleNumber = 50,
+    particleNumber = 25,
     className = O2_AMBIENT_CLASSNAME,
     maxRadius = 5
   }) {
-    this.width = width
-    this.height = height
+    this.devicePixelRatio = getDevicePixelRatio()
+    this.width = width * this.devicePixelRatio
+    this.height = height * this.devicePixelRatio
     this.FPS = fps
     this.textures = textures
     this.className = className
@@ -25,22 +26,27 @@ class Snow {
     this.maxSpeed = 3
 
     this.initFPS()
+    this.initTexture()
     this.initDOM()
     this.addParticles()
-    this.draw = this.drawDefault
+    this.bindEvents()
     this.play()
   }
 
   initDOM () {
     const canvas = document.createElement('canvas')
-    canvas.className = this.className
+    const devicePixelRatio = this.devicePixelRatio
     canvas.style.position = 'fixed'
-    canvas.style.left = 0
-    canvas.style.top = 0
+    canvas.style.left = '0'
+    canvas.style.top = '0'
+    canvas.style.width = `${this.width / devicePixelRatio}px`
+    canvas.style.height = `${this.height / devicePixelRatio}px`
+    canvas.style.zIndex = -1
+    canvas.style.pointerEvents = 'none'
+    canvas.className = this.className
     canvas.width = this.width
     canvas.height = this.height
     this.parent.appendChild(canvas)
-
     this.canvas = canvas
     this.ctx = canvas.getContext('2d')
   }
@@ -49,6 +55,47 @@ class Snow {
     this.INTERVAL = 1000 / this.FPS
     this.nextTime = Date.now()
     this.startTime = this.nextTime
+  }
+
+  initTexture () {
+    this.isTexture = this.textures.length > 0
+    this.draw = this.drawDefault
+    this.maxRadius = 5
+    if (this.isTexture) {
+      this.setTexureCache()
+      this.draw = this.drawTexture
+    }
+  }
+
+  setTexureCache () {
+    this.offCanvas = document.createElement('canvas')
+    this.offCtx = this.offCanvas.getContext('2d')
+    this.offWidth = 0
+    this.offHeight = 0
+    let maxSize = 0
+    this.textures.forEach((img, index) => {
+      this.offWidth += img.width
+      this.offHeight = Math.max(img.height, this.offHeight || 0)
+      maxSize = Math.max(this.offHeight, img.width)
+    })
+    this.maxRadius = maxSize
+
+    this.offCanvas.width = this.offWidth
+    this.offCanvas.height = this.offHeight
+
+    let x = 0
+    const y = 0
+    this.imgsSize = []
+    this.textures.forEach((img, index) => {
+      this.imgsSize.push({
+        x,
+        y,
+        width: img.width,
+        height: img.height
+      })
+      this.offCtx.drawImage(img, x, y, img.width, img.height)
+      x += img.width
+    })
   }
 
   bindEvents () {
@@ -60,26 +107,57 @@ class Snow {
     window.removeEventListener('resize', this.windowResizeHandleSelf, false)
   }
 
+  windowResizeHandle (e) {
+    const devicePixelRatio = this.devicePixelRatio
+
+    this.width = window.innerWidth * devicePixelRatio
+    this.height = window.innerHeight * devicePixelRatio
+    this.canvas.width = this.width
+    this.canvas.height = this.height
+    this.canvas.style.width = `${this.width / devicePixelRatio}px`
+    this.canvas.style.height = `${this.height / devicePixelRatio}px`
+  }
+
   addParticles () {
     const particles = []
     const maxRadius = this.maxRadius
     const maxSpeed = this.maxSpeed
 
     for (let i = 0; i < this.PARTICLE_NUMBER; i++) {
-      const radius = getRandom(2, maxRadius)
+      const imgIndex = getRandomInt(0, this.textures.length - 1)
+      const radius = (this.isTexture ? this.imgsSize[imgIndex].width : getRandom(2, maxRadius)) * (this.devicePixelRatio / 2)
       particles.push({
         x: getRandomInt(0, this.width),
         y: getRandomInt(0, this.height),
         r: radius,
         a: getRandom(0, Math.PI),
+        rotate: getRandomInt(-360, 360),
         offsetX: getRandom(0, 1),
         aStep: 0.01,
         opacity: radius / maxRadius,
-        speed: (radius / maxRadius) * maxSpeed
+        speed: (radius / maxRadius) * maxSpeed,
+        imgIndex,
       })
     }
-
     this.particles = particles
+  }
+
+  drawTexture () {
+    const ctx = this.ctx
+    this.particles.forEach(particle => {
+      const size = this.imgsSize[particle.imgIndex]
+      const width = size.width
+      const height = size.height
+      ctx.save()
+      ctx.translate(particle.x + (width / 2), particle.y + (height / 2))
+      ctx.rotate(particle.rotate * Math.PI / 180)
+      ctx.drawImage(
+        this.offCanvas,
+        size.x, size.y, width, height,
+        (-width / 2), (-height / 2), particle.r, particle.r
+      )
+      ctx.restore()
+    })
   }
 
   drawDefault () {
@@ -132,6 +210,7 @@ class Snow {
 
         if (particle.y >= this.height) {
           particle.y = -particle.r
+          particle.x = getRandomInt(0, this.width)
         }
       })
     }

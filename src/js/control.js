@@ -38,12 +38,12 @@ class Control {
     gui.add(config, 'particleNumber', 3, 100, 1).name('粒子数量').onChange(val => {
       window[O2_AMBIENT_INIT]()
     })
-    gui.addColor(otherConfig, 'backgroundColor').name('背景颜色').onFinishChange(val => {
+    gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
       Control.setBackgroundColor(val)
     })
-    gui.add(config, 'maxRadius', 4, 10, 1).name('粒子最大半径').onFinishChange(val => {
+    /* gui.add(config, 'maxRadius', 4, 10, 1).name('粒子最大半径').onFinishChange(val => {
       window[O2_AMBIENT_INIT]()
-    })
+    }) */
     this.gui = gui
     this.setGUIzIndex(2)
   }
