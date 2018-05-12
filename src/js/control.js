@@ -5,6 +5,7 @@ import {
   O2_AMBIENT_CONFIG
 } from './components/const'
 import { getParameterByName } from './components/utils'
+import forEach from 'lodash/forEach'
 
 /* eslint-disable no-unused-vars */
 const isLoop = getParameterByName('loop')
@@ -26,6 +27,7 @@ class Control {
     this.config = window[O2_AMBIENT_CONFIG]
     this.otherConfig = new OtherConfig()
     this.initBaseGUI()
+    this.initTextureGUI()
     Control.setBackgroundColor(this.otherConfig.backgroundColor)
   }
 
@@ -46,6 +48,22 @@ class Control {
     }) */
     this.gui = gui
     this.setGUIzIndex(2)
+  }
+
+  initTextureGUI () {
+    const gui = this.gui
+    const textures = this.config.textures
+    const texturesFolder = gui.addFolder('纹理')
+    let index = 0
+    forEach(textures, (texture, key) => {
+      const textureController = texturesFolder.add(textures, key).name(`纹理${index++}`)
+      textureController.onFinishChange(val => {
+        window[O2_AMBIENT_INIT]()
+      })
+    })
+    texturesFolder.open()
+
+    this.texturesFolder = texturesFolder
   }
 
   setGUIzIndex (zIndex) {
