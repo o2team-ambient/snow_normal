@@ -1,5 +1,5 @@
 import debounce from 'lodash/debounce'
-import { getRandom, getRandomInt, getDevicePixelRatio } from './utils'
+import { getRandom, getRandomInt, getDevicePixelRatio, degToRad } from './utils'
 import { O2_AMBIENT_CLASSNAME } from './const'
 
 class Snow {
@@ -150,7 +150,7 @@ class Snow {
       const height = size.height
       ctx.save()
       ctx.translate(particle.x + (width / 2), particle.y + (height / 2))
-      ctx.rotate(particle.rotate * Math.PI / 180)
+      ctx.rotate(degToRad(particle.rotate))
       ctx.drawImage(
         this.offCanvas,
         size.x, size.y, width, height,

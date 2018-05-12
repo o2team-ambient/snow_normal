@@ -25,9 +25,19 @@ function getDevicePixelRatio () {
   return result
 }
 
+function degToRad (deg) {
+  return (Math.PI / 180) * deg
+}
+
+function radToDeg (rad) {
+  return (180 / Math.PI) * rad
+}
+
 export {
   getParameterByName,
   getRandom,
   getRandomInt,
-  getDevicePixelRatio
+  getDevicePixelRatio,
+  degToRad,
+  radToDeg
 }
