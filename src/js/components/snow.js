@@ -209,7 +209,7 @@ class Snow {
         particle.y += particle.speed
 
         if (particle.y >= this.height) {
-          particle.y = -particle.r
+          particle.y = -particle.r * 2
           particle.x = getRandomInt(0, this.width)
         }
       })
