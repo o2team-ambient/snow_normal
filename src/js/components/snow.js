@@ -79,7 +79,6 @@ class Snow {
       maxSize = Math.max(this.offHeight, img.width)
     })
     this.maxRadius = maxSize
-
     this.offCanvas.width = this.offWidth
     this.offCanvas.height = this.offHeight
 
@@ -209,7 +208,7 @@ class Snow {
         particle.y += particle.speed
 
         if (particle.y >= this.height) {
-          particle.y = -particle.r * 2
+          particle.y = -this.maxRadius
           particle.x = getRandomInt(0, this.width)
         }
       })
