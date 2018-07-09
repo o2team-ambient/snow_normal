@@ -1,4 +1,4 @@
-const id = '<%= appName %>'
+const id = 'snow-normal'
 const ID = id.toUpperCase()
 
 export const O2_AMBIENT_MAIN = `O2_AMBIENT_${ID}_MAIN`

@@ -1,8 +1,8 @@
 {
-  "author": "<%= author %>",
-  "demoUrl": "<%= demoUrl %>",
-  "title": "<%= appName %>",
-  "github": "<%= github %>",
+  "author": "liujianchao1",
+  "demoUrl": "http://jdc.jd.com/demo/ambient/snow-normal/",
+  "title": "snow-normal",
+  "github": "https://github.com/o2team-ambient/snow-normal",
   "demoSnippet": "{{__snippet__}}",
   "controlUrl": "{{__control__}}",
   "configUrl": "{{__config__}}"
