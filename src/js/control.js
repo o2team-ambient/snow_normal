@@ -1,4 +1,4 @@
-import dat from 'dat.gui'
+import dat from '@o2team/ambient-dat.gui'
 import {
   O2_AMBIENT_MAIN,
   O2_AMBIENT_INIT,
@@ -38,6 +38,9 @@ class Control {
     gui.add(otherConfig, 'message').name('配置面板')
     gui.add(otherConfig, 'play').name('播放 / 暂停')
     gui.add(config, 'particleNumber', 3, 30, 1).name('粒子数量').onFinishChange(val => {
+      window[O2_AMBIENT_INIT]()
+    })
+    gui.add(config, 'duration', 0, 600, 30).name('持续时间').onFinishChange(val => {
       window[O2_AMBIENT_INIT]()
     })
     gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {

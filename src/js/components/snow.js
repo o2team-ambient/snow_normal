@@ -3,6 +3,10 @@ import { getRandom, getRandomInt, getDevicePixelRatio, degToRad } from './utils'
 import { O2_AMBIENT_CLASSNAME } from './const'
 
 class Snow {
+  durCounter = 0
+  timestamp = 0
+  isStopAdding = false
+
   constructor ({
     width = window.innerWidth,
     height = window.innerHeight,
@@ -11,7 +15,8 @@ class Snow {
     textures = [],
     particleNumber = 25,
     className = O2_AMBIENT_CLASSNAME,
-    maxRadius = 5
+    maxRadius = 5,
+    duration = 0
   }) {
     this.devicePixelRatio = getDevicePixelRatio()
     this.width = width * this.devicePixelRatio
@@ -24,6 +29,7 @@ class Snow {
     this.PARTICLE_NUMBER = particleNumber
     this.maxRadius = maxRadius
     this.maxSpeed = 3
+    this.duration = duration
 
     this.initFPS()
     this.initTexture()
@@ -127,7 +133,7 @@ class Snow {
       const radius = (this.isTexture ? this.imgsSize[imgIndex].width : getRandom(2, maxRadius)) * (this.devicePixelRatio / 2)
       particles.push({
         x: getRandomInt(0, this.width),
-        y: getRandomInt(0, this.height),
+        y: getRandomInt(0, -this.height),
         r: radius,
         a: getRandom(0, Math.PI),
         rotate: getRandomInt(-360, 360),
@@ -190,28 +196,42 @@ class Snow {
       : this.pause()
   }
 
-  loop () {
+  loop (ts) {
     this.rafId = requestAnimationFrame(this.loop.bind(this))
     if (this.isPaused) return
+    if (!this.timestamp) this.timestamp = ts
 
     const now = Date.now()
     const elapsed = now - this.nextTime
+    const clockcounter = now - this.timestamp
 
+    if (clockcounter >= 1000) {
+      this.timestamp = now
+      this.durCounter += 1
+    }
+    if (this.duration && this.durCounter >= this.duration) this.isStopAdding = true
     if (elapsed > this.INTERVAL) {
       this.nextTime = now - (elapsed % this.INTERVAL)
 
       this.ctx.clearRect(0, 0, this.width, this.height)
       this.draw()
+
+      let isSnowInViewport = !this.isStopAdding
       this.particles.forEach((particle, index) => {
+        if (particle.y + (particle.r * 2) < 0 && this.isStopAdding) return
         particle.x += Math.cos(particle.a) * particle.offsetX
         particle.a += particle.aStep
         particle.y += particle.speed
 
-        if (particle.y >= this.height) {
+        if (particle.y >= this.height && !this.isStopAdding) {
           particle.y = -this.maxRadius
           particle.x = getRandomInt(0, this.width)
         }
+        if (particle.y - (particle.r * 2) >= 0 && particle.y < this.height) {
+          isSnowInViewport = true
+        }
       })
+      if (!isSnowInViewport) cancelAnimationFrame(this.rafId)
     }
   }
 

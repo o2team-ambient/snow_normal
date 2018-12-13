@@ -21,12 +21,13 @@ function initAmbient () {
     const texturesArr = values(config.textures).filter(texture => texture.trim() !== '')
     const preloader = new Preloader({
       resources: texturesArr,
-      concurrency: 4,
+      concurrency: 4
     })
     preloader.addCompletionListener(() => {
       snow = new Snow({
         textures: texturesArr.map(imgSrc => preloader.get(imgSrc)),
         particleNumber: config.particleNumber,
+        duration: config.duration
       })
       window[O2_AMBIENT_MAIN] = snow
     })

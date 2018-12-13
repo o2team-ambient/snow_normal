@@ -9,7 +9,7 @@
     "eslint": "eslint */component */page"
   },
   "dependencies": {
-    "dat.gui": "^0.7.1",
+    "@o2team/ambient-dat.gui": "^0.7.7",
     "preloader.js": "^1.1.3"
   },
   "eslintConfig": {
