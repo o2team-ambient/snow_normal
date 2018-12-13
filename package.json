@@ -1,18 +1,20 @@
 {
-  "name": "normal",
+  "name": "snow-normal",
   "version": "1.0.0",
-  "description": "普通下雪",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "ath2 s",
-    "build": "ath2 build",
-    "test": "",
-    "eslint": "eslint */component */page"
+    "start": "am s",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "liyixin",
+  "license": "ISC",
   "dependencies": {
     "@o2team/ambient-dat.gui": "^0.7.7",
+    "lodash": "^4.17.11",
     "preloader.js": "^1.1.3"
   },
-  "eslintConfig": {
-    "extends": "eslint-config-o2team"
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1"
   }
 }

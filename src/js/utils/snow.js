@@ -1,5 +1,5 @@
 import debounce from 'lodash/debounce'
-import { getRandom, getRandomInt, getDevicePixelRatio, degToRad } from './utils'
+import { getRandom, getRandomInt, getDevicePixelRatio, degToRad } from './util'
 import { O2_AMBIENT_CLASSNAME } from './const'
 
 class Snow {
