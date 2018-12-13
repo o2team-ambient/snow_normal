@@ -16,18 +16,19 @@ const isLoop = getParameterByName('loop')
 let controlInit = () => {
   // 非必要配置字段（仅用于展示，如背景颜色、启动/暂停）
   class OtherConfig {
-    constructor () {
-      this.message = 'Snow-无交互'
-      this.backgroundColor = '#2f85dc'
+    constructor() {
+      this.message = '雪花-normal'
+      this.backgroundColor = '#bddaf7'
       this.play = () => {
-        window[O2_AMBIENT_MAIN] && window[O2_AMBIENT_MAIN].toggle()
+        if (!window[O2_AMBIENT_MAIN] || !window[O2_AMBIENT_MAIN].toggle || typeof window[O2_AMBIENT_MAIN].toggle !== 'function') return
+        window[O2_AMBIENT_MAIN].toggle()
       }
     }
   }
 
   // 主控制面板
   class Control extends Controller {
-    constructor () {
+    constructor() {
       super()
       this.otherConfig = new OtherConfig()
       this.initBaseGUI()
@@ -35,13 +36,12 @@ let controlInit = () => {
       this.isShowController && !this.isAmbientPlat && this.setBackgroundColor(this.otherConfig.backgroundColor)
     }
 
-    initBaseGUI () {
+    initBaseGUI() {
       // demo code
       const config = this.config
       const otherConfig = this.otherConfig
       const gui = new dat.GUI()
       gui.addCallbackFunc(this.resetCanvas.bind(this))
-      
       gui.add(otherConfig, 'message').name('配置面板')
       gui.add(otherConfig, 'play').name('播放 / 暂停')
       config.particleNumber && gui.add(config, 'particleNumber', 3, 100, 1).name('粒子数量').onFinishChange(val => {
@@ -54,12 +54,15 @@ let controlInit = () => {
       gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
         Control.setBackgroundColor(val)
       })
+      this.isShowController && !this.isAmbientPlat && gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
+        this.setBackgroundColor(val)
+      })
       this.gui = gui
       // 设置控制面板层级
       this.setGUIzIndex(2)
     }
 
-    initTextureGUI () {
+    initTextureGUI() {
       // demo code
       const gui = this.gui
       const textures = this.config.textures

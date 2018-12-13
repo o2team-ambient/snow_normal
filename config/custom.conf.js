@@ -4,4 +4,5 @@ module.exports = {
   // 静态资源路径
   cdn: '//storage.jd.com/ambient/',
   // 自定义 webpack 配置项
+  webpack: ''
 }
