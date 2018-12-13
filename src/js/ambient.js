@@ -20,7 +20,7 @@ function initAmbient() {
 }
 
 // 初始化函数
-window[O2_AMBIENT_INIT] = initAmbient
+// window[O2_AMBIENT_INIT] = initAmbient
 
 try {
   // 保证配置读取顺序

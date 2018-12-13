@@ -49,7 +49,8 @@ let controlInit = () => {
         this.resetCanvas()
       })
       gui.add(config, 'duration', 0, 600, 30).name('持续时间').onFinishChange(val => {
-        window[O2_AMBIENT_INIT]()
+        // window[O2_AMBIENT_INIT]()
+        this.resetCanvas()
       })
       gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
         Control.setBackgroundColor(val)

@@ -6,8 +6,7 @@
 import {
   O2_AMBIENT_MAIN,
   O2_AMBIENT_CONFIG,
-  O2_AMBIENT_CONFIG_KEY,
-  O2_AMBIENT_INIT
+  O2_AMBIENT_CONFIG_KEY
 } from './const'
 import { getParameterByName } from './util'
 

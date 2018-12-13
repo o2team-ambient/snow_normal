@@ -3,7 +3,7 @@
   "demoUrl": "http://jdc.jd.com/demo/ambient/snow-normal/",
   "title": "snow-normal",
   "github": "https://github.com/o2team-ambient/snow-normal",
-  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-snow-normal.css?t=1544694126000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <div class=\"o2team_ambient_main\">\n  </div>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-snow-normal.js?t=1544694126000\"></script>",
-  "controlUrl": "//storage.jd.com/ambient/control-snow-normal.js?t=1544694126000",
-  "configUrl": "//storage.jd.com/ambient/config-snow-normal.js?t=1544694126000"
+  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-snow-normal.css?t=1544706586000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <div class=\"o2team_ambient_main\">\n  </div>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-snow-normal.js?t=1544706586000\"></script>",
+  "controlUrl": "//storage.jd.com/ambient/control-snow-normal.js?t=1544706586000",
+  "configUrl": "//storage.jd.com/ambient/config-snow-normal.js?t=1544706586000"
 }
