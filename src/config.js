@@ -18,5 +18,7 @@ window[O2_AMBIENT_CONFIG] = {
     texture8: snow4
   },
   duration: 0,
-  endCallback: () => {}
+  endCallback: () => {
+    console.log('雪花落完了')
+  }
 }

@@ -215,7 +215,7 @@ class Snow extends AmbientBase {
           particle.y = -this.maxRadius
           particle.x = getRandomInt(0, this.width)
         }
-        if (particle.y - (particle.r * 2) >= 0 && particle.y < this.height) {
+        if (particle.y + (particle.r * 2) >= 0 && particle.y < this.height) {
           isSnowInViewport = true
         }
       })
