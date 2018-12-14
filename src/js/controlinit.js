@@ -55,9 +55,9 @@ let controlInit = () => {
       gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
         Control.setBackgroundColor(val)
       })
-      this.isShowController && !this.isAmbientPlat && gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
-        this.setBackgroundColor(val)
-      })
+      // this.isShowController && !this.isAmbientPlat && gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
+      //   this.setBackgroundColor(val)
+      // })
       this.gui = gui
       // 设置控制面板层级
       this.setGUIzIndex(2)
