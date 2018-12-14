@@ -219,8 +219,15 @@ class Snow extends AmbientBase {
           isSnowInViewport = true
         }
       })
-      if (!isSnowInViewport) cancelAnimationFrame(this.rafId)
+      if (!isSnowInViewport) {
+        this.endCallback()
+        cancelAnimationFrame(this.rafId)
+      }
     }
+  }
+
+  endCallback () {
+    typeof window[O2_AMBIENT_CONFIG].endCallback === 'function' && window[O2_AMBIENT_CONFIG].endCallback()
   }
 }
 

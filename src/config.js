@@ -17,5 +17,6 @@ window[O2_AMBIENT_CONFIG] = {
     texture7: snow3,
     texture8: snow4
   },
-  duration: 0
+  duration: 0,
+  endCallback: () => {}
 }
