@@ -227,7 +227,13 @@ class Snow extends AmbientBase {
   }
 
   endCallback () {
-    typeof window[O2_AMBIENT_CONFIG].endCallback === 'function' && window[O2_AMBIENT_CONFIG].endCallback()
+    const endCallback = window[O2_AMBIENT_CONFIG].endCallback
+    typeof endCallback === 'function' && endCallback()
+    if (typeof endCallback === 'string') {
+      try {
+        eval(`(${decodeURI(endCallback)})()`)
+      } catch(e) {}
+    }
   }
 }
 

@@ -6,7 +6,8 @@
 import {
   O2_AMBIENT_MAIN,
   O2_AMBIENT_CONFIG,
-  O2_AMBIENT_CONFIG_KEY
+  O2_AMBIENT_CONFIG_KEY,
+  O2_AMBIENT_IS_CONFIG_RESET
 } from './const'
 import { getParameterByName } from './util'
 
@@ -33,6 +34,9 @@ class Controller {
     if (!this.isShowController && !this.isAmbientPlat) {
       this.setControllerHide()
     }
+
+    if (window[O2_AMBIENT_CONFIG_KEY]) return
+    window[O2_AMBIENT_CONFIG_KEY] = O2_AMBIENT_CONFIG
   }
 
   // 监听 postmessage
@@ -87,9 +91,9 @@ class Controller {
   resetCanvas(opts) {
     if (this.isAmbientPlat) {
       this.transferProcess()
-      
-      if (window[O2_AMBIENT_CONFIG_KEY]) return
-      window[O2_AMBIENT_CONFIG_KEY] = O2_AMBIENT_CONFIG
+
+      if (window[O2_AMBIENT_IS_CONFIG_RESET]) return
+      window[O2_AMBIENT_IS_CONFIG_RESET] = true
 
       return
     }
