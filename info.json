@@ -1,7 +1,7 @@
 {
   "author": "liujianchao1",
-  "demoUrl": "http://jdc.jd.com/demo/ambient/snow-normal/",
-  "miniDemoUrl": "http://jdc.jd.com/demo/ambient/snow-normal/index_demo.html",
+  "demoUrl": "//o2team-ambient.github.io/snow-normal/dist/",
+  "miniDemoUrl": "//o2team-ambient.github.io/snow-normal/dist/index_demo.html",
   "title": "snow-normal",
   "ambName": "雪花-无交互",
   "github": "https://github.com/o2team-ambient/snow-normal",
