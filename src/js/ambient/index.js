@@ -17,15 +17,14 @@ import filter from 'lodash/filter'
 import trim from 'lodash/trim'
 
 class Snow extends AmbientBase {
-  durCounter = 0
-  timestamp = 0
-  isStopAdding = false
-
   constructor() {
     super()
     this.devicePixelRatio = getDevicePixelRatio()
     this.isPaused = false
     this.isInited = false
+    this.durCounter = 0
+    this.timestamp = 0
+    this.isStopAdding = false
     this.reset()
     this.initFPS()
     this.initDOM()

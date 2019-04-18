@@ -1,8 +1,8 @@
 {
   "author": "liujianchao1",
-  "demoUrl": "//o2team-ambient.github.io/snow-normal/dist/",
-  "miniDemoUrl": "//o2team-ambient.github.io/snow-normal/dist/index_demo.html",
-  "title": "snow-normal",
+  "demoUrl": "//o2team-ambient.github.io/snow_normal/dist/",
+  "miniDemoUrl": "//o2team-ambient.github.io/snow_normal/dist/index_demo.html",
+  "title": "snow_normal",
   "ambName": "雪花-无交互",
   "github": "https://github.com/o2team-ambient/snow-normal",
   "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-snow-normal.css?t=1552470024000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <div class=\"o2team_ambient_main\">\n  </div>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-snow-normal.js?t=1552470024000\"></script>",
