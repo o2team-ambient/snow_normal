@@ -25,7 +25,7 @@ ATAmbient({
 |-|-|-|-|
 | particleNumber | `number` | - | 粒子数量 |
 | textures | `array<string>` | - | 素材列表 |
-| duration | `number` | - | 持续时间 |
+| duration | `number` | - | 持续时间（秒） |
 | endCallback | `string` | - | 结束回调（需用 encodeURI 转码） |
 
 ## 预览地址

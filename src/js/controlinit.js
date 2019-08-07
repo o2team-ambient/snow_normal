@@ -44,15 +44,15 @@ let controlInit = () => {
       gui.addCallbackFunc(this.resetCanvas.bind(this))
       gui.add(otherConfig, 'message').name('配置面板')
       gui.add(otherConfig, 'play').name('播放 / 暂停')
-      config.particleNumber && gui.add(config, 'particleNumber', 3, 100, 1).name('粒子数量').onFinishChange(val => {
+      config.particleNumber && gui.add(config, 'particleNumber', 3, 100, 1).name('粒子密度').onFinishChange(val => {
         // window[O2_AMBIENT_INIT]()
         this.resetCanvas()
       })
-      gui.add(config, 'duration', 0, 600, 30).name('持续时间').onFinishChange(val => {
+      gui.add(config, 'duration', 0, 600, 30).name('持续时间（秒）').onFinishChange(val => {
         // window[O2_AMBIENT_INIT]()
         this.resetCanvas()
       })
-      gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
+      gui.addColor(otherConfig, 'backgroundColor').name('背景色（仅演示）').onFinishChange(val => {
         Control.setBackgroundColor(val)
       })
       // this.isShowController && !this.isAmbientPlat && gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
