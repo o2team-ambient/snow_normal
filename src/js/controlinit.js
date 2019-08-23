@@ -5,7 +5,8 @@
 
 import dat from '@o2team/ambient-dat.gui'
 import {
-  O2_AMBIENT_MAIN
+  O2_AMBIENT_MAIN,
+  O2_AMBIENT_CONFIG
 } from './utils/const'
 import Controller from './utils/controller'
 import { getParameterByName } from './utils/util'
@@ -40,7 +41,20 @@ let controlInit = () => {
       // demo code
       const config = this.config
       const otherConfig = this.otherConfig
-      const gui = new dat.GUI()
+      const gui = new dat.GUI({
+        preset: 'default',
+        load: {
+          "remembered": {
+            "default": {
+              '0': {...window[O2_AMBIENT_CONFIG]}
+            },
+            "snow": {
+              '0': {...window[O2_AMBIENT_CONFIG]}
+            }
+          }
+        }
+      })
+      gui.remember(config)
       gui.addCallbackFunc(this.resetCanvas.bind(this))
       gui.add(otherConfig, 'message').name('配置面板')
       gui.add(otherConfig, 'play').name('播放 / 暂停')
@@ -52,12 +66,12 @@ let controlInit = () => {
         // window[O2_AMBIENT_INIT]()
         this.resetCanvas()
       })
-      gui.addColor(otherConfig, 'backgroundColor').name('背景色（仅演示）').onFinishChange(val => {
-        Control.setBackgroundColor(val)
-      })
-      // this.isShowController && !this.isAmbientPlat && gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
+      // gui.addColor(otherConfig, 'backgroundColor').name('背景色（仅演示）').onFinishChange(val => {
       //   this.setBackgroundColor(val)
       // })
+      this.isShowController && !this.isAmbientPlat && gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
+        this.setBackgroundColor(val)
+      })
       this.gui = gui
       // 设置控制面板层级
       this.setGUIzIndex(2)

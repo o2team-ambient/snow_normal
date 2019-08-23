@@ -5,9 +5,9 @@
   "title": "snow_normal",
   "ambName": "雪花-无交互",
   "github": "https://github.com/o2team-ambient/snow-normal",
-  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-snow_normal.css?t=1566459582000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <div class=\"o2team_ambient_main\">\n  </div>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-snow_normal.js?t=1566459582000\"></script>",
-  "controlUrl": "//storage.jd.com/ambient/control-snow_normal.js?t=1566459582000",
-  "configUrl": "//storage.jd.com/ambient/config-snow_normal.js?t=1566459582000",
+  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-snow_normal.css?t=1566569424000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <div class=\"o2team_ambient_main\">\n  </div>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-snow_normal.js?t=1566569424000\"></script>",
+  "controlUrl": "//storage.jd.com/ambient/control-snow_normal.js?t=1566569424000",
+  "configUrl": "//storage.jd.com/ambient/config-snow_normal.js?t=1566569424000",
   "placeholderImg": "//storage.jd.com/ambient/snow-normal_placeholder.png?t=1554280830000",
   "spriteImg": "//storage.jd.com/ambient/snow-normal_sprite.png?t=1554280830000"
 }
