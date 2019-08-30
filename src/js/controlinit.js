@@ -62,7 +62,7 @@ let controlInit = () => {
         // window[O2_AMBIENT_INIT]()
         this.resetCanvas()
       })
-      gui.add(config, 'duration', 0, 600, 30).name('持续时间（秒）').onFinishChange(val => {
+      gui.add(config, 'duration', 0, 600, 1).name('持续时间（秒）').onFinishChange(val => {
         // window[O2_AMBIENT_INIT]()
         this.resetCanvas()
       })
