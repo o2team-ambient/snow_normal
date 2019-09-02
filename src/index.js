@@ -18,7 +18,7 @@ try {
 
 const handleReport = () => {
   Report.init({})
-  Report.processPV()
+  Report.processPV(21)
 }
 
 if (typeof window.XView === 'undefined') {
