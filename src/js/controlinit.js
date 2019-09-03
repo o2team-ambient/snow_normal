@@ -10,6 +10,7 @@ import {
 } from './utils/const'
 import Controller from './utils/controller'
 import { getParameterByName } from './utils/util'
+import configVelantine from './configs/configVelantine'
 
 /* eslint-disable no-unused-vars */
 const isLoop = getParameterByName('loop')
@@ -42,14 +43,17 @@ let controlInit = () => {
       const config = this.config
       const otherConfig = this.otherConfig
       const gui = new dat.GUI({
-        preset: 'default',
+        preset: '七夕',
         load: {
           "remembered": {
             "default": {
-              '0': {...window[O2_AMBIENT_CONFIG]}
+              "0": {...window[O2_AMBIENT_CONFIG]}
             },
             "snow": {
-              '0': {...window[O2_AMBIENT_CONFIG]}
+              "0": {...window[O2_AMBIENT_CONFIG]}
+            },
+            "七夕": {
+              "0": {...configVelantine}
             }
           }
         }
