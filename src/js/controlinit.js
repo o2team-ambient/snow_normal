@@ -43,7 +43,7 @@ let controlInit = () => {
       const config = this.config
       const otherConfig = this.otherConfig
       const gui = new dat.GUI({
-        preset: '七夕',
+        preset: 'default',
         load: {
           "remembered": {
             "default": {
@@ -63,11 +63,12 @@ let controlInit = () => {
       gui.add(otherConfig, 'message').name('配置面板')
       gui.add(otherConfig, 'play').name('播放 / 暂停')
       config.particleNumber && gui.add(config, 'particleNumber', 3, 100, 1).name('粒子密度').onFinishChange(val => {
-        // window[O2_AMBIENT_INIT]()
         this.resetCanvas()
       })
       gui.add(config, 'duration', 0, 600, 1).name('持续时间（秒）').onFinishChange(val => {
-        // window[O2_AMBIENT_INIT]()
+        this.resetCanvas()
+      })
+      gui.add(config, 'speed', 0, 100, 1).name('下落速度').onFinishChange(val => {
         this.resetCanvas()
       })
       // gui.addColor(otherConfig, 'backgroundColor').name('背景色（仅演示）').onFinishChange(val => {
@@ -79,6 +80,10 @@ let controlInit = () => {
       this.gui = gui
       // 设置控制面板层级
       this.setGUIzIndex(2)
+
+      setTimeout(() => {
+        this.resetCanvas()
+      }, 2000)
     }
 
     initTextureGUI() {

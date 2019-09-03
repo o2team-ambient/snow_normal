@@ -20,11 +20,7 @@ class Snow extends AmbientBase {
   constructor() {
     super()
     this.devicePixelRatio = getDevicePixelRatio()
-    this.isPaused = false
     this.isInited = false
-    this.durCounter = 0
-    this.timestamp = 0
-    this.isStopAdding = false
     this.reset()
     this.initFPS()
     this.initDOM()
@@ -55,6 +51,10 @@ class Snow extends AmbientBase {
   }
 
   reset() {
+    this.isPaused = false
+    this.durCounter = 0
+    this.timestamp = 0
+    this.isStopAdding = false
     this.width = window.innerWidth * this.devicePixelRatio
     this.height = window.innerHeight * this.devicePixelRatio
     this.parent = document.querySelector('.o2team_ambient_main')
@@ -64,7 +64,7 @@ class Snow extends AmbientBase {
     }))
     this.particleNumber = window[O2_AMBIENT_CONFIG].particleNumber
     this.maxRadius = window[O2_AMBIENT_CONFIG].maxRadius
-    this.maxSpeed = 3
+    this.maxSpeed = window[O2_AMBIENT_CONFIG].speed
     this.className = O2_AMBIENT_CLASSNAME
     this.isInited && this.create()
   }
@@ -89,6 +89,7 @@ class Snow extends AmbientBase {
     this.offHeight = 0
     let maxSize = 0
     this.textures.forEach((img, index) => {
+      if (!img) return
       this.offWidth += img.width
       this.offHeight = Math.max(img.height, this.offHeight || 0)
       maxSize = Math.max(this.offHeight, img.width)
@@ -101,6 +102,7 @@ class Snow extends AmbientBase {
     const y = 0
     this.imgsSize = []
     this.textures.forEach((img, index) => {
+      if (!img) return
       this.imgsSize.push({
         x,
         y,
@@ -139,19 +141,22 @@ class Snow extends AmbientBase {
 
     for (let i = 0; i < this.particleNumber; i++) {
       const imgIndex = getRandomInt(0, this.textures.length - 1)
-      const radius = (this.isTexture ? this.imgsSize[imgIndex].width : getRandom(2, maxRadius)) * (this.devicePixelRatio / 2)
-      particles.push({
-        x: getRandomInt(0, this.width),
-        y: getRandomInt(0, -this.height),
-        r: radius,
-        a: getRandom(0, Math.PI),
-        rotate: getRandomInt(-360, 360),
-        offsetX: getRandom(0, 1),
-        aStep: 0.01,
-        opacity: radius / maxRadius,
-        speed: (radius / maxRadius) * maxSpeed,
-        imgIndex,
-      })
+
+      if (this.imgsSize[imgIndex]) {
+        const radius = (this.isTexture ? this.imgsSize[imgIndex].width : getRandom(2, maxRadius)) * (this.devicePixelRatio / 2)
+        particles.push({
+          x: getRandomInt(0, this.width),
+          y: getRandomInt(0, -this.height),
+          r: radius,
+          a: getRandom(0, Math.PI),
+          rotate: getRandomInt(-360, 360),
+          offsetX: getRandom(0, 1),
+          aStep: 0.01,
+          opacity: radius / maxRadius,
+          speed: (radius / maxRadius) * maxSpeed,
+          imgIndex,
+        })
+      }
     }
     this.particles = particles
   }
@@ -160,6 +165,7 @@ class Snow extends AmbientBase {
     const ctx = this.ctx
     this.particles.forEach(particle => {
       const size = this.imgsSize[particle.imgIndex]
+      if (!size) return
       const width = size.width
       const height = size.height
       ctx.save()

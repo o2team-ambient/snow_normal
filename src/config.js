@@ -23,6 +23,7 @@ window[O2_AMBIENT_CONFIG] = {
     snow4
   ],
   duration: 0,
+  speed: 3,
   endCallback: encodeURI((() => {
     console.log('雪花落完了')
   }).toString())
