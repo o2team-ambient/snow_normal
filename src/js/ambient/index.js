@@ -37,7 +37,6 @@ class Snow extends AmbientBase {
     this.isTexture = this.texturesURL.length > 0
     if (this.isTexture) {
       this.preloader = await this.preloadTextures(this.texturesURL)
-      console.log(this.preloader)
       this.textures = map(this.texturesURL, url => {
         return this.preloader.get(url)
       })
