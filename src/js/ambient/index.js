@@ -36,7 +36,8 @@ class Snow extends AmbientBase {
   async create() {
     this.isTexture = this.texturesURL.length > 0
     if (this.isTexture) {
-      this.preloader = await this.preloadTextures()
+      this.preloader = await this.preloadTextures(this.texturesURL)
+      console.log(this.preloader)
       this.textures = map(this.texturesURL, url => {
         return this.preloader.get(url)
       })
@@ -69,14 +70,15 @@ class Snow extends AmbientBase {
     this.isInited && this.create()
   }
 
-  preloadTextures() {
+  preloadTextures(textures) {
     const preloader = new Preloader({
-      resources: this.texturesURL,
+      resources: textures,
       concurrency: 4
     })
     preloader.start()
     return new Promise((resolve, reject) => {
       preloader.addCompletionListener(() => {
+        if (this.texturesURL.length !== preloader.length || !preloader.resourceMap[this.texturesURL[0]]) return
         resolve(preloader)
       })
     })
