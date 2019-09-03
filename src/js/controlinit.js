@@ -6,10 +6,12 @@
 import dat from '@o2team/ambient-dat.gui'
 import {
   O2_AMBIENT_MAIN,
-  O2_AMBIENT_CONFIG
+  O2_AMBIENT_CONFIG,
+  O2_AMBIENT_CLASSNAME
 } from './utils/const'
 import Controller from './utils/controller'
 import { getParameterByName } from './utils/util'
+import processLocalConfig from './utils/processLocalConfig'
 
 import configKeys from './configs/keys'
 import configVelantine from './configs/configVelantine'
@@ -18,6 +20,8 @@ import configVelantine from './configs/configVelantine'
 const isLoop = getParameterByName('loop')
 const configKeyVal = getParameterByName('configKey')
 const configKey = configKeys[configKeyVal] || configKeys['default']
+
+const localData = processLocalConfig(configKeyVal, configKey, O2_AMBIENT_CLASSNAME)
 
 let controlInit = () => {
   // 非必要配置字段（仅用于展示，如背景颜色、启动/暂停）
@@ -45,7 +49,9 @@ let controlInit = () => {
       // demo code
       const config = this.config
       const otherConfig = this.otherConfig
+      console.log(localData)
       const gui = new dat.GUI({
+        name: O2_AMBIENT_CLASSNAME,
         preset: configKey,
         load: {
           "remembered": {
@@ -57,10 +63,12 @@ let controlInit = () => {
             },
             "七夕": {
               "0": {...configVelantine}
-            }
+            },
+            ...localData.remembered
           }
         }
       })
+      gui.useLocalStorage = true
       gui.remember(config)
       gui.addCallbackFunc(this.resetCanvas.bind(this))
       gui.add(otherConfig, 'play').name('播放 / 暂停')
