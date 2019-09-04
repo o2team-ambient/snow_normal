@@ -16,7 +16,7 @@ export default function ({ configKey = '', guiName = '', loadData = {} }) {
   }
 
   if (localData.remembered) {
-    localData.remembered = { ...loadData, ...localData.remembered }
+    localData.remembered = { ...localData.remembered, ...loadData }
   }
 
   localStorage.setItem(`${guiName || document.location.href}.gui`, JSON.stringify(localData))
