@@ -1,5 +1,5 @@
 export default function (configKeyVal, configKey, guiName) {
-  if (!configKeyVal) return
+  if (!configKeyVal) return { remembered: {} }
 
   const localData = JSON.parse(localStorage.getItem(`${guiName || document.location.href}.gui`))
 

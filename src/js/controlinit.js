@@ -49,7 +49,6 @@ let controlInit = () => {
       // demo code
       const config = this.config
       const otherConfig = this.otherConfig
-      console.log(localData)
       const gui = new dat.GUI({
         name: O2_AMBIENT_CLASSNAME,
         preset: configKey,
