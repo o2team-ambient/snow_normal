@@ -15,8 +15,8 @@ import processLocalConfig from './utils/processLocalConfig'
 
 import configKeys from './configs/keys'
 import configVelantine from './configs/configVelantine'
-import configNationalDayFlag from './configs/configNationalDayFlag'
-import configNationalDayLantern from './configs/configNationalDayLantern'
+// import configNationalDayFlag from './configs/configNationalDayFlag'
+// import configNationalDayLantern from './configs/configNationalDayLantern'
 
 /* eslint-disable no-unused-vars */
 const isLoop = getParameterByName('loop')
@@ -33,12 +33,12 @@ const loadData = {
   '七夕': {
     '0': { ...configVelantine }
   },
-  '国庆-红旗': {
-    '0': {...configNationalDayFlag}
-  },
-  '国庆-灯笼': {
-    '0': {...configNationalDayLantern}
-  }
+  // '国庆-红旗': {
+  //   '0': {...configNationalDayFlag}
+  // },
+  // '国庆-灯笼': {
+  //   '0': {...configNationalDayLantern}
+  // }
 }
 const allLoadData = processLocalConfig({ configKey, guiName: O2_AMBIENT_CLASSNAME, loadData })
 
@@ -75,8 +75,8 @@ let controlInit = () => {
           'remembered': { ...allLoadData.remembered }
         }
       })
-      gui.useLocalStorage = true
-      gui.remember(config)
+      // gui.useLocalStorage = true
+      // gui.remember(config)
       gui.addCallbackFunc(this.resetCanvas.bind(this))
       gui.add(otherConfig, 'play').name('播放 / 暂停')
       config.particleNumber && gui.add(config, 'particleNumber', 3, 100, 1).name('粒子密度').onFinishChange(val => {
