@@ -23,26 +23,30 @@ const isLoop = getParameterByName('loop')
 const configKeyVal = getParameterByName('configKey')
 const configKey = configKeys[configKeyVal] || configKeys['default']
 
-const loadData = {
-  '默认': {
-    '0': { ...window[O2_AMBIENT_CONFIG] }
-  },
-  '雪花': {
-    '0': { ...window[O2_AMBIENT_CONFIG] }
-  },
-  '七夕': {
-    '0': { ...configVelantine }
-  },
-  // '国庆-红旗': {
-  //   '0': {...configNationalDayFlag}
-  // },
-  // '国庆-灯笼': {
-  //   '0': {...configNationalDayLantern}
-  // }
-}
-const allLoadData = processLocalConfig({ configKey, guiName: O2_AMBIENT_CLASSNAME, loadData })
+// 删除缓存
+window.localStorage.removeItem('o2_ambient_snow-normal.isLocal')
+window.localStorage.removeItem('o2_ambient_snow-normal.gui')
 
 let controlInit = () => {
+  const loadData = {
+    '默认': {
+      '0': { ...window[O2_AMBIENT_CONFIG] }
+    },
+    '雪花': {
+      '0': { ...window[O2_AMBIENT_CONFIG] }
+    },
+    '七夕': {
+      '0': { ...configVelantine }
+    },
+    // '国庆-红旗': {
+    //   '0': {...configNationalDayFlag}
+    // },
+    // '国庆-灯笼': {
+    //   '0': {...configNationalDayLantern}
+    // }
+  }
+  const allLoadData = processLocalConfig({ configKey, guiName: O2_AMBIENT_CLASSNAME, loadData })
+
   // 非必要配置字段（仅用于展示，如背景颜色、启动/暂停）
   class OtherConfig {
     constructor() {
